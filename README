@@ -1,1 +1,28 @@
 マスタースレーブ構成用のS2JDBCのJdbcManager
+
+- s2jdbc.dicon の例（未検証）
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+        "http://www.seasar.org/dtd/components24.dtd">
+<components>
+    <include path="s2jdbc-master.dicon"/><!-- masterJdbcManagerの登録を行う -->
+    <include path="s2jdbc-slave1.dicon"/><!-- slave1JdbcManagerの登録を行う -->
+    <include path="s2jdbc-slave2.dicon"/><!-- slave2JdbcManagerの登録を行う -->
+
+    <!-- AbstractServiceではこのjdbcManagerを利用する -->
+    <component name="jdbcManager"
+      class="jp.troter.seasar.extension.jdbc.manager.MasterSlaveJdbcManagerProxy">
+    </component>
+
+    <!-- ファクトリ。
+     | マスタースレーブの切り替えなどを担当
+     | アプリケーションでマスタースレーブの切り替えを指定する場合は
+     | MasterSlaveJdbcManagerFactoryUtilとあわせて利用する。
+     |-->
+    <component class="jp.troter.seasar.extension.jdbc.manager.MasterSlaveJdbcManagerFactoryImpl">
+      <property name="masterJdbcManagerName">"master"</property>
+      <initMethod name="addSlaveJdbcManagerName"><arg>"slave1"</arg></initMethod>
+      <initMethod name="addSlaveJdbcManagerName"><arg>"slave2"</arg></initMethod>
+    </component>
+</components>
