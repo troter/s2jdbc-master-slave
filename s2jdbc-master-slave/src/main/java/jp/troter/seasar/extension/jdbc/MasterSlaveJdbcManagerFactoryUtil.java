@@ -8,6 +8,18 @@ public class MasterSlaveJdbcManagerFactoryUtil {
     
     protected static Random random = new Random(new Date().getTime());
 
+    /**
+     * 以降このスレッドではマスターを利用します。
+     * @param factory
+     */
+    public static void useMaster(MasterSlaveJdbcManagerFactory factory) {
+        factory.setJdbcManagerName(factory.getMasterJdbcManagerName());
+    }
+
+    /**
+     * 以降このスレッドでは(更新が発生しない限り)スレーブを利用します。
+     * @param factory
+     */
     public static void useSlave(MasterSlaveJdbcManagerFactory factory) {
         List<String> names = factory.getSlaveJdbcManagerNames();
         if (names.isEmpty()) {
@@ -17,10 +29,6 @@ public class MasterSlaveJdbcManagerFactoryUtil {
 
         String name = names.get(random.nextInt(names.size()));
         factory.setJdbcManagerName(name);
-    }
-
-    public static void useMaster(MasterSlaveJdbcManagerFactory factory) {
-        factory.setJdbcManagerName(factory.getMasterJdbcManagerName());
     }
 
     /**
