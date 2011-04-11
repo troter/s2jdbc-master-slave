@@ -42,17 +42,11 @@ public class MasterSlaveJdbcManagerProxy implements JdbcManager {
 
     /**
      * マスターとして使用する<code>JdbcManager</code>を取得します。
-     * <p>
-     * 一度でもマスターを利用した場合、それ以降、同じスレッドではマスターを利用し続けます。
-     * </p>
      * @return <code>JdbcManager</code>
      */
     protected JdbcManager getMasterJdbcManager() {
         JdbcManager masterJdbcManager
             = masterSlaveJdbcManagerFactory.getMasterJdbcManager();
-
-        // 一度でもマスターを利用した場合、それ以降、同じスレッドではマスターを利用し続けます。
-        MasterSlaveJdbcManagerFactoryUtil.useMaster(masterSlaveJdbcManagerFactory);
         return masterJdbcManager;
     }
 
