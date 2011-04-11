@@ -2,7 +2,6 @@ package jp.troter.seasar.extension.jdbc;
 
 import java.util.List;
 
-import org.seasar.extension.jdbc.JdbcManager;
 
 public interface MasterSlaveJdbcManagerFactory {
 
@@ -52,12 +51,12 @@ public interface MasterSlaveJdbcManagerFactory {
      * マスターとして使用する<code>JdbcManager</code>を取得します。 
      * @return
      */
-    JdbcManager getMasterJdbcManager();
+    JdbcManagerWrapper getMasterJdbcManager();
 
     /**
      * スレーブもしくはマスターとして使用する<code>JdbcManager</code>を取得します。 
      * @return
      */
-    JdbcManager getSlaveOrMasterJdbcManager();
+    JdbcManagerWrapper getSlaveOrMasterJdbcManager();
 
 }

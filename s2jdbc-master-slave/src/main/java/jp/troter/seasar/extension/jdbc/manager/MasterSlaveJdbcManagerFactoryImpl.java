@@ -2,6 +2,7 @@ package jp.troter.seasar.extension.jdbc.manager;
 
 import java.util.List;
 
+import jp.troter.seasar.extension.jdbc.JdbcManagerWrapper;
 import jp.troter.seasar.extension.jdbc.MasterSlaveJdbcManagerFactory;
 
 import org.seasar.extension.jdbc.JdbcManager;
@@ -72,7 +73,7 @@ public class MasterSlaveJdbcManagerFactoryImpl implements
     }
 
     @Override
-    public JdbcManager getMasterJdbcManager() {
+    public JdbcManagerWrapper getMasterJdbcManager() {
         String name = getMasterJdbcManagerName();
 
         JdbcManager jdbcManager
@@ -82,7 +83,7 @@ public class MasterSlaveJdbcManagerFactoryImpl implements
     }
 
     @Override
-    public JdbcManager getSlaveOrMasterJdbcManager() {
+    public JdbcManagerWrapper getSlaveOrMasterJdbcManager() {
         String name = getJdbcManagerName();
         if (isMasterJdbcManagerName(name)) {
             return getMasterJdbcManager();

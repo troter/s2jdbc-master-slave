@@ -3,7 +3,6 @@ package jp.troter.seasar.extension.jdbc.manager;
 import java.util.List;
 
 import jp.troter.seasar.extension.jdbc.MasterSlaveJdbcManagerFactory;
-import jp.troter.seasar.extension.jdbc.MasterSlaveJdbcManagerFactoryUtil;
 
 import org.seasar.extension.jdbc.AutoBatchDelete;
 import org.seasar.extension.jdbc.AutoBatchInsert;
@@ -45,9 +44,7 @@ public class MasterSlaveJdbcManagerProxy implements JdbcManager {
      * @return <code>JdbcManager</code>
      */
     protected JdbcManager getMasterJdbcManager() {
-        JdbcManager masterJdbcManager
-            = masterSlaveJdbcManagerFactory.getMasterJdbcManager();
-        return masterJdbcManager;
+        return masterSlaveJdbcManagerFactory.getMasterJdbcManager();
     }
 
     /**

@@ -2,6 +2,9 @@ package jp.troter.seasar.extension.jdbc.manager;
 
 import java.util.List;
 
+import jp.troter.seasar.extension.jdbc.JdbcManagerWrapper;
+
+
 import org.seasar.extension.jdbc.AutoBatchDelete;
 import org.seasar.extension.jdbc.AutoBatchInsert;
 import org.seasar.extension.jdbc.AutoBatchUpdate;
@@ -23,12 +26,17 @@ import org.seasar.extension.jdbc.SqlProcedureCall;
 import org.seasar.extension.jdbc.SqlSelect;
 import org.seasar.extension.jdbc.SqlUpdate;
 
-public class MasterJdbcManagerWrapper implements JdbcManager {
+public class MasterJdbcManagerWrapper implements JdbcManagerWrapper {
 
     protected JdbcManager jdbcManager;
 
     public MasterJdbcManagerWrapper(JdbcManager jdbcManager) {
         this.jdbcManager = jdbcManager;
+    }
+
+    @Override
+    public JdbcManager getJdbcManager() {
+        return jdbcManager;
     }
 
     @Override
