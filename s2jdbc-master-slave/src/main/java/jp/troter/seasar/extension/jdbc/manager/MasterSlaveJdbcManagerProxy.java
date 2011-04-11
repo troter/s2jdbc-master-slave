@@ -24,6 +24,7 @@ import org.seasar.extension.jdbc.SqlFunctionCall;
 import org.seasar.extension.jdbc.SqlProcedureCall;
 import org.seasar.extension.jdbc.SqlSelect;
 import org.seasar.extension.jdbc.SqlUpdate;
+import org.seasar.framework.container.S2Container;
 
 /**
  * マスタースレーブのDB構成用の<code>JdbcManager</code>のプロキシです。
@@ -35,16 +36,36 @@ import org.seasar.extension.jdbc.SqlUpdate;
 public class MasterSlaveJdbcManagerProxy implements JdbcManager {
 
     /**
-     * マスタースレーブの<code>JdbcManager</code>のファクトリです。
+     * S2コンテナです。
      */
-    protected MasterSlaveJdbcManagerFactory masterSlaveJdbcManagerFactory;
+    protected S2Container container;
+
+    /**
+     * <code>MasterSlaveJdbcManagerFactory</code>のコンポーネント名です。
+     */
+    protected String masterSlaveJdbcManagerFactoryName;
+
+    /**
+     * <code>MasterSlaveJdbcManagerFactory</code>のコンポーネント名を設定します。
+     * @param name
+     */
+    public void setMasterSlaveJdbcManagerFactoryName(String name) {
+        this.masterSlaveJdbcManagerFactoryName = name;
+    }
+
+    /**
+     * マスタースレーブの<code>JdbcManager</code>のファクトリを取得します。
+     */
+    protected MasterSlaveJdbcManagerFactory getMasterSlaveJdbcManagerFactory() {
+        return (MasterSlaveJdbcManagerFactory)container.getRoot().getComponent(masterSlaveJdbcManagerFactoryName);
+    }
 
     /**
      * マスターとして使用する<code>JdbcManager</code>を取得します。
      * @return <code>JdbcManager</code>
      */
     protected JdbcManager getMasterJdbcManager() {
-        return masterSlaveJdbcManagerFactory.getMasterJdbcManager();
+        return getMasterSlaveJdbcManagerFactory().getMasterJdbcManager();
     }
 
     /**
@@ -52,7 +73,7 @@ public class MasterSlaveJdbcManagerProxy implements JdbcManager {
      * @return <code>JdbcManager</code>
      */
     protected JdbcManager getSlaveOrMasterJdbcManager() {
-        return masterSlaveJdbcManagerFactory.getSlaveOrMasterJdbcManager();
+        return getMasterSlaveJdbcManagerFactory().getSlaveOrMasterJdbcManager();
     }
 
     @Override

@@ -13,6 +13,7 @@
     <!-- AbstractServiceではこのjdbcManagerを利用する -->
     <component name="jdbcManager"
       class="jp.troter.seasar.extension.jdbc.manager.MasterSlaveJdbcManagerProxy">
+      <property name="masterSlaveJdbcManagerFactoryName">"masterSlaveJdbcManagerFactory"</property>
     </component>
 
     <!-- ファクトリ。
@@ -20,7 +21,8 @@
      | アプリケーションでマスタースレーブの切り替えを指定する場合は
      | MasterSlaveJdbcManagerFactoryUtilとあわせて利用する。
      |-->
-    <component class="jp.troter.seasar.extension.jdbc.manager.MasterSlaveJdbcManagerFactoryImpl">
+    <component name="masterSlaveJdbcManagerFactory"
+      class="jp.troter.seasar.extension.jdbc.manager.MasterSlaveJdbcManagerFactoryImpl">
       <property name="masterJdbcManagerName">"master"</property>
       <initMethod name="addSlaveJdbcManagerName"><arg>"slave1"</arg></initMethod>
       <initMethod name="addSlaveJdbcManagerName"><arg>"slave2"</arg></initMethod>
