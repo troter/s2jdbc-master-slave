@@ -54,6 +54,22 @@ public class MasterSlaveJdbcManagerProxy implements JdbcManager {
     }
 
     /**
+     * @return S2コンテナ
+     */
+    public S2Container getContainer() {
+        return container;
+    }
+
+    /**
+     * @param container
+     *            S2コンテナ
+     */
+    public void setContainer(S2Container container) {
+        this.container = container;
+    }
+
+
+    /**
      * マスタースレーブの<code>JdbcManager</code>のファクトリを取得します。
      */
     protected MasterSlaveJdbcManagerFactory getMasterSlaveJdbcManagerFactory() {

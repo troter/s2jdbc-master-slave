@@ -33,6 +33,21 @@ public class MasterSlaveJdbcManagerFactoryImpl implements
      */
     protected S2Container container;
 
+    /**
+     * @return S2コンテナ
+     */
+    public S2Container getContainer() {
+        return container;
+    }
+
+    /**
+     * @param container
+     *            S2コンテナ
+     */
+    public void setContainer(S2Container container) {
+        this.container = container;
+    }
+
     @Override
     public String getMasterJdbcManagerName() {
         return masterJdbcManagerName;
