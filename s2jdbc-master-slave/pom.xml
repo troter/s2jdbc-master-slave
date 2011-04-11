@@ -89,6 +89,12 @@
       <artifactId>s2-tiger</artifactId>
       <version>2.4.43</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.geronimo.specs</groupId>
+      <artifactId>geronimo-jta_1.1_spec</artifactId>
+      <version>1.0</version>
+    </dependency>
   </dependencies>
 
   <distributionManagement>
