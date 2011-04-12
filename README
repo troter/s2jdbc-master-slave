@@ -1,6 +1,6 @@
 マスタースレーブ構成用のS2JDBCのJdbcManager
 
-- s2jdbc.dicon の例（未検証）
+- s2jdbc.dicon の例
 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
