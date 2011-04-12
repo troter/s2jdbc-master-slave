@@ -2,6 +2,9 @@ package jp.troter.seasar.extension.jdbc.manager;
 
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import jp.troter.seasar.extension.jdbc.JdbcManagerWrapper;
 import jp.troter.seasar.extension.jdbc.MasterSlaveJdbcManagerFactory;
 
 import org.seasar.extension.jdbc.AutoBatchDelete;
@@ -13,6 +16,9 @@ import org.seasar.extension.jdbc.AutoInsert;
 import org.seasar.extension.jdbc.AutoProcedureCall;
 import org.seasar.extension.jdbc.AutoSelect;
 import org.seasar.extension.jdbc.AutoUpdate;
+import org.seasar.extension.jdbc.DbmsDialect;
+import org.seasar.extension.jdbc.EntityMetaFactory;
+import org.seasar.extension.jdbc.JdbcContext;
 import org.seasar.extension.jdbc.JdbcManager;
 import org.seasar.extension.jdbc.SqlBatchUpdate;
 import org.seasar.extension.jdbc.SqlFileBatchUpdate;
@@ -24,7 +30,9 @@ import org.seasar.extension.jdbc.SqlFunctionCall;
 import org.seasar.extension.jdbc.SqlProcedureCall;
 import org.seasar.extension.jdbc.SqlSelect;
 import org.seasar.extension.jdbc.SqlUpdate;
+import org.seasar.extension.jdbc.manager.JdbcManagerImplementor;
 import org.seasar.framework.container.S2Container;
+import org.seasar.framework.convention.PersistenceConvention;
 
 /**
  * マスタースレーブのDB構成用の<code>JdbcManager</code>のプロキシです。
@@ -33,7 +41,7 @@ import org.seasar.framework.container.S2Container;
  * </p>
  *
  */
-public class MasterSlaveJdbcManagerProxy implements JdbcManager {
+public class MasterSlaveJdbcManagerProxy implements JdbcManager, JdbcManagerImplementor {
 
     /**
      * S2コンテナです。
@@ -80,7 +88,7 @@ public class MasterSlaveJdbcManagerProxy implements JdbcManager {
      * マスターとして使用する<code>JdbcManager</code>を取得します。
      * @return <code>JdbcManager</code>
      */
-    protected JdbcManager getMasterJdbcManager() {
+    protected JdbcManagerWrapper getMasterJdbcManager() {
         return getMasterSlaveJdbcManagerFactory().getMasterJdbcManager();
     }
 
@@ -88,7 +96,7 @@ public class MasterSlaveJdbcManagerProxy implements JdbcManager {
      * スレーブもしくはマスターとして使用する<code>JdbcManager</code>を取得します。
      * @return <code>JdbcManager</code>
      */
-    protected JdbcManager getSlaveOrMasterJdbcManager() {
+    protected JdbcManagerWrapper getSlaveOrMasterJdbcManager() {
         return getMasterSlaveJdbcManagerFactory().getSlaveOrMasterJdbcManager();
     }
 
@@ -269,6 +277,41 @@ public class MasterSlaveJdbcManagerProxy implements JdbcManager {
     public <T> SqlFileFunctionCall<T> callBySqlFile(Class<T> resultClass,
             String path, Object parameter) {
         return getSlaveOrMasterJdbcManager().callBySqlFile(resultClass, path, parameter);
+    }
+
+    @Override
+    public JdbcContext getJdbcContext() {
+        return getMasterJdbcManager().getJdbcContext();
+    }
+
+    @Override
+    public DataSource getDataSource() {
+        return getMasterJdbcManager().getDataSource();
+    }
+
+    @Override
+    public String getSelectableDataSourceName() {
+        return getMasterJdbcManager().getSelectableDataSourceName();
+    }
+
+    @Override
+    public DbmsDialect getDialect() {
+        return getMasterJdbcManager().getDialect();
+    }
+
+    @Override
+    public EntityMetaFactory getEntityMetaFactory() {
+        return getMasterJdbcManager().getEntityMetaFactory();
+    }
+
+    @Override
+    public PersistenceConvention getPersistenceConvention() {
+        return getMasterJdbcManager().getPersistenceConvention();
+    }
+
+    @Override
+    public boolean isAllowVariableSqlForBatchUpdate() {
+        return getMasterJdbcManager().isAllowVariableSqlForBatchUpdate();
     }
 
 }

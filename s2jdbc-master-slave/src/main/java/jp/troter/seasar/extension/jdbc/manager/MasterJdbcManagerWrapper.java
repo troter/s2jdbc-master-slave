@@ -2,8 +2,9 @@ package jp.troter.seasar.extension.jdbc.manager;
 
 import java.util.List;
 
-import jp.troter.seasar.extension.jdbc.JdbcManagerWrapper;
+import javax.sql.DataSource;
 
+import jp.troter.seasar.extension.jdbc.JdbcManagerWrapper;
 
 import org.seasar.extension.jdbc.AutoBatchDelete;
 import org.seasar.extension.jdbc.AutoBatchInsert;
@@ -14,6 +15,9 @@ import org.seasar.extension.jdbc.AutoInsert;
 import org.seasar.extension.jdbc.AutoProcedureCall;
 import org.seasar.extension.jdbc.AutoSelect;
 import org.seasar.extension.jdbc.AutoUpdate;
+import org.seasar.extension.jdbc.DbmsDialect;
+import org.seasar.extension.jdbc.EntityMetaFactory;
+import org.seasar.extension.jdbc.JdbcContext;
 import org.seasar.extension.jdbc.JdbcManager;
 import org.seasar.extension.jdbc.SqlBatchUpdate;
 import org.seasar.extension.jdbc.SqlFileBatchUpdate;
@@ -25,6 +29,7 @@ import org.seasar.extension.jdbc.SqlFunctionCall;
 import org.seasar.extension.jdbc.SqlProcedureCall;
 import org.seasar.extension.jdbc.SqlSelect;
 import org.seasar.extension.jdbc.SqlUpdate;
+import org.seasar.framework.convention.PersistenceConvention;
 
 public class MasterJdbcManagerWrapper implements JdbcManagerWrapper {
 
@@ -216,6 +221,41 @@ public class MasterJdbcManagerWrapper implements JdbcManagerWrapper {
     public <T> SqlFileFunctionCall<T> callBySqlFile(Class<T> resultClass,
             String path, Object parameter) {
         return jdbcManager.callBySqlFile(resultClass, path, parameter);
+    }
+
+    @Override
+    public JdbcContext getJdbcContext() {
+        return Methods.implementor(jdbcManager).getJdbcContext();
+    }
+
+    @Override
+    public DataSource getDataSource() {
+        return Methods.implementor(jdbcManager).getDataSource();
+    }
+
+    @Override
+    public String getSelectableDataSourceName() {
+        return Methods.implementor(jdbcManager).getSelectableDataSourceName();
+    }
+
+    @Override
+    public DbmsDialect getDialect() {
+        return Methods.implementor(jdbcManager).getDialect();
+    }
+
+    @Override
+    public EntityMetaFactory getEntityMetaFactory() {
+        return Methods.implementor(jdbcManager).getEntityMetaFactory();
+    }
+
+    @Override
+    public PersistenceConvention getPersistenceConvention() {
+        return Methods.implementor(jdbcManager).getPersistenceConvention();
+    }
+
+    @Override
+    public boolean isAllowVariableSqlForBatchUpdate() {
+        return Methods.implementor(jdbcManager).isAllowVariableSqlForBatchUpdate();
     }
 
 }
