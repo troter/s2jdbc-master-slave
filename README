@@ -1,5 +1,19 @@
 マスタースレーブ構成用のS2JDBCのJdbcManager
 
+- maven の記述
+
+    <repository>
+      <id>troter.jp/release</id>
+      <name>TROTER.JP Release Maven2 Repository</name>
+      <url>http://troter.jp/maven2/release</url>
+    </repository>
+
+    <dependency>
+      <groupId>jp.troter</groupId>
+      <artifactId>s2jdbc-master-slave</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+
 - s2jdbc.dicon の例
 
 <?xml version="1.0" encoding="UTF-8"?>
