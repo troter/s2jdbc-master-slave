@@ -16,8 +16,7 @@
 package jp.troter.seasar.extension.jdbc.manager;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.matchers.IsCollectionContaining.*;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.Before;
 import org.junit.Test;
