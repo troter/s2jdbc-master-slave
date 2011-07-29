@@ -10,7 +10,46 @@
 
   <!-- More Project Information -->
   <name>s2jdbc-master-slave</name>
-  <description />
+  <description>
+    Master-Slave support for S2JDBC.
+  </description>
+
+  <url>https://github.com/troter/s2jdbc-master-slave</url>
+  <inceptionYear>2011</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:git@github.com:troter/s2jdbc-master-slave.git</connection>
+    <developerConnection>scm:git:git@github.com:troter/s2jdbc-master-slave.git</developerConnection>
+    <url>scm:git:git@github.com:troter/s2jdbc-master-slave.git</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>troter</id>
+      <name>Troter</name>
+      <email>trot.thunder@gmail.com</email>
+      <url>http://troter.jp/</url>
+      <roles>
+        <role>lead</role>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>+9</timezone>
+    </developer>
+  </developers>
+
+  <issueManagement>
+    <system>github.com</system>
+    <url>https://github.com/troter/s2jdbc-master-slave/issues</url>
+  </issueManagement>
 
   <!-- Properties -->
   <properties>
