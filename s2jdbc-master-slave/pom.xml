@@ -57,6 +57,14 @@
     </plugins>
   </build>
 
+  <repositories>
+    <repository>
+      <id>maven.seasar.org</id>
+      <name>The Seasar Foundation Maven2 Repository</name>
+      <url>http://maven.seasar.org/maven2</url>
+    </repository>
+  </repositories>
+
   <!-- Dependency Settings -->
   <dependencies>
     <!-- JUnit4 -->
