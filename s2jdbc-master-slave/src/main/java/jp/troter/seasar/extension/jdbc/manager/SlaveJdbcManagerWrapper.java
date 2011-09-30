@@ -50,13 +50,21 @@ public class SlaveJdbcManagerWrapper implements JdbcManagerWrapper {
 
     protected JdbcManager jdbcManager;
 
-    public SlaveJdbcManagerWrapper(JdbcManager jdbcManager) {
+    protected String name;
+
+    public SlaveJdbcManagerWrapper(JdbcManager jdbcManager, String name) {
         this.jdbcManager = jdbcManager;
+        this.name = name;
     }
 
     @Override
     public JdbcManager getJdbcManager() {
         return jdbcManager;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override

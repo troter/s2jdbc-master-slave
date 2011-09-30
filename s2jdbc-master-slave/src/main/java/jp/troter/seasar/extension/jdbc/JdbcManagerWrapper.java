@@ -26,6 +26,12 @@ public interface JdbcManagerWrapper extends JdbcManager, JdbcManagerImplementor 
      */
     JdbcManager getJdbcManager();
 
+    /**
+     * コンポーネント名を返します
+     * @return
+     */
+    String getName();
+
     public static class Methods {
         public static JdbcManagerImplementor implementor(JdbcManager jdbcManager) {
             if (jdbcManager instanceof JdbcManagerImplementor) {

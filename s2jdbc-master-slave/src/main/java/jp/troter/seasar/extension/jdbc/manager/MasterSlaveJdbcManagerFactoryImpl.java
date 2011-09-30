@@ -109,7 +109,7 @@ public class MasterSlaveJdbcManagerFactoryImpl implements
         JdbcManager jdbcManager
             = (JdbcManager) container.getRoot().getComponent(
                     getJdbcManagerComponentName(name));
-        return new MasterJdbcManagerWrapper(jdbcManager);
+        return new MasterJdbcManagerWrapper(jdbcManager, name);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class MasterSlaveJdbcManagerFactoryImpl implements
         JdbcManager jdbcManager
             = (JdbcManager) container.getRoot().getComponent(
                     getJdbcManagerComponentName(name));
-        return new SlaveJdbcManagerWrapper(jdbcManager);
+        return new SlaveJdbcManagerWrapper(jdbcManager, name);
     }
 
     /**

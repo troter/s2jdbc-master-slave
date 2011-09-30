@@ -52,8 +52,10 @@ public class MasterSlaveJdbcManagerFactoryImplGetJdbcManagerTest {
     public void smoke() {
         assertThat(i.getMasterJdbcManager(), instanceOf(MasterJdbcManagerWrapper.class));
         assertThat(i.getMasterJdbcManager().getJdbcManager(), is(master));
+        assertThat(i.getMasterJdbcManager().getName() , is("master"));
         assertThat(i.getSlaveOrMasterJdbcManager(), instanceOf(MasterJdbcManagerWrapper.class));
         assertThat(i.getSlaveOrMasterJdbcManager().getJdbcManager(), is(master));
+        assertThat(i.getSlaveOrMasterJdbcManager().getName() , is("master"));
     }
 
     @Test
@@ -63,27 +65,35 @@ public class MasterSlaveJdbcManagerFactoryImplGetJdbcManagerTest {
         i.setJdbcManagerName("slave1");
         assertThat(i.getMasterJdbcManager(), instanceOf(MasterJdbcManagerWrapper.class));
         assertThat(i.getMasterJdbcManager().getJdbcManager(), is(master));
+        assertThat(i.getMasterJdbcManager().getName() , is("master"));
         assertThat(i.getSlaveOrMasterJdbcManager(), instanceOf(SlaveJdbcManagerWrapper.class));
         assertThat(i.getSlaveOrMasterJdbcManager().getJdbcManager(), is(slave1));
+        assertThat(i.getSlaveOrMasterJdbcManager().getName() , is("slave1"));
 
         i.setJdbcManagerName("not exists");
         assertThat(i.getMasterJdbcManager(), instanceOf(MasterJdbcManagerWrapper.class));
         assertThat(i.getMasterJdbcManager().getJdbcManager(), is(master));
+        assertThat(i.getMasterJdbcManager().getName() , is("master"));
         assertThat(i.getSlaveOrMasterJdbcManager(), instanceOf(MasterJdbcManagerWrapper.class));
         assertThat(i.getSlaveOrMasterJdbcManager().getJdbcManager(), is(master));
+        assertThat(i.getSlaveOrMasterJdbcManager().getName() , is("master"));
 
         i.addSlaveJdbcManagerName("slave2");
         i.setJdbcManagerName("slave2");
         assertThat(i.getMasterJdbcManager(), instanceOf(MasterJdbcManagerWrapper.class));
         assertThat(i.getMasterJdbcManager().getJdbcManager(), is(master));
+        assertThat(i.getMasterJdbcManager().getName() , is("master"));
         assertThat(i.getSlaveOrMasterJdbcManager(), instanceOf(SlaveJdbcManagerWrapper.class));
         assertThat(i.getSlaveOrMasterJdbcManager().getJdbcManager(), is(slave2));
+        assertThat(i.getSlaveOrMasterJdbcManager().getName() , is("slave2"));
 
         i.setJdbcManagerName("master");
         assertThat(i.getMasterJdbcManager(), instanceOf(MasterJdbcManagerWrapper.class));
         assertThat(i.getMasterJdbcManager().getJdbcManager(), is(master));
+        assertThat(i.getMasterJdbcManager().getName() , is("master"));
         assertThat(i.getSlaveOrMasterJdbcManager(), instanceOf(MasterJdbcManagerWrapper.class));
         assertThat(i.getSlaveOrMasterJdbcManager().getJdbcManager(), is(master));
+        assertThat(i.getSlaveOrMasterJdbcManager().getName() , is("master"));
     }
 
 }
