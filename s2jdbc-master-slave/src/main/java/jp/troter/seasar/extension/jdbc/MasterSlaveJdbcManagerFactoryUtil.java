@@ -34,7 +34,7 @@ public class MasterSlaveJdbcManagerFactoryUtil {
     }
 
     /**
-     * 以降このスレッドでは(更新が発生しない限り)スレーブを利用します。
+     * 以降このスレッドではスレーブを利用します。
      * @param factory
      */
     public static void useSlave(MasterSlaveJdbcManagerFactory factory) {
