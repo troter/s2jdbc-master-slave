@@ -44,6 +44,11 @@ public class MasterSlaveJdbcManagerFactoryImpl implements
     protected ThreadLocal<String> jdbcManagerName = new ThreadLocal<String>();
 
     /**
+     * 接続のバリデーション用のクエリを設定します。
+     */
+    String validationQuery = "SELECT 1";
+
+    /**
      * S2コンテナです。
      */
     protected S2Container container;
@@ -123,6 +128,16 @@ public class MasterSlaveJdbcManagerFactoryImpl implements
             = (JdbcManager) container.getRoot().getComponent(
                     getJdbcManagerComponentName(name));
         return new SlaveJdbcManagerWrapper(jdbcManager, name);
+    }
+
+    @Override
+    public void setValidationQuery(String validationQuery) {
+        this.validationQuery = validationQuery;
+    }
+
+    @Override
+    public String getValidationQuery() {
+        return validationQuery;
     }
 
     /**

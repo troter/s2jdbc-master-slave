@@ -74,4 +74,15 @@ public interface MasterSlaveJdbcManagerFactory {
      */
     JdbcManagerWrapper getSlaveOrMasterJdbcManager();
 
+    /**
+     * 接続のバリデーション用のクエリを設定します。
+     * @param validationQuery
+     */
+    void setValidationQuery(String validationQuery);
+
+    /**
+     * 接続のバリデーション用のクエリを取得します。
+     * @param validationQuery
+     */
+    String getValidationQuery();
 }
