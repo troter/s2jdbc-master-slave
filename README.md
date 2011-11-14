@@ -24,8 +24,8 @@ pom.xmlに追記する設定
       </dependency>
     </dependencies>
 
-利用設定
---------
+設定
+----
 
 **s2jdbc.diconの設定例**
 
@@ -44,14 +44,26 @@ pom.xmlに追記する設定
         </component>
     
         <!-- ファクトリ。
-         | マスタースレーブの切り替えなどを担当
+         | マスタースレーブのJdbcManagerの作成を担当
          | アプリケーションでマスタースレーブの切り替えを指定する場合は
-         | MasterSlaveJdbcManagerFactoryUtilとあわせて利用する。
+         | MasterSlaveContextとあわせて利用する。
          |-->
         <component name="masterSlaveJdbcManagerFactory"
           class="jp.troter.seasar.extension.jdbc.manager.MasterSlaveJdbcManagerFactoryImpl">
           <property name="masterJdbcManagerName">"master"</property>
           <initMethod name="addSlaveJdbcManagerName"><arg>"slave1"</arg></initMethod>
           <initMethod name="addSlaveJdbcManagerName"><arg>"slave2"</arg></initMethod>
+        </component>
+
+        <!-- コンテキストオブジェクト。
+         | マスタースレーブ切り替えなどを担当
+         |-->
+        <component class="jp.troter.seasar.extension.jdbc.manager.MasterSlaveContextImpl">
+          <property name="MasterSlaveExceptionHanlderClass">
+            @jp.troter.seasar.extension.jdbc.handler.DefaultMasterSlaveExceptionHanlder@class
+          </property>
+          <initMethod name="addMasterSlaveJdbcManagerFactoryName">
+            <arg>"masterSlaveJdbcManagerFactory"</arg>
+          </initMethod>
         </component>
     </components>

@@ -69,4 +69,10 @@ public interface MasterSlaveContext {
      * @return
      */
     List<MasterSlaveJdbcManagerFactory> getMasterSlaveJdbcManagerFactories();
+
+    /**
+     * 例外ハンドラを設定します。
+     * @param handlerClass
+     */
+    void setMasterSlaveExceptionHanlderClass(Class<? extends MasterSlaveExceptionHandler> handlerClass);
 }
