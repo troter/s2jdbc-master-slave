@@ -144,6 +144,7 @@ public class MasterSlaveContextImpl implements MasterSlaveContext {
             } catch (Throwable t) {
                 if (getMasterSlaveExceptionHandler(name).isShouldRemove(t)) {
                     factory.removeSlaveJdbcManagerName(jdbcManager.getName());
+                    logger.warn("ファクトリ["+name+"]のスレーブ["+jdbcManager.getName()+"]を切り離します。");
                 }
             }
         }
