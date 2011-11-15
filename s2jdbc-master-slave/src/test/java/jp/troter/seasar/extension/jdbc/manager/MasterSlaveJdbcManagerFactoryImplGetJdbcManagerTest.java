@@ -41,7 +41,7 @@ public class MasterSlaveJdbcManagerFactoryImplGetJdbcManagerTest {
         i = new MasterSlaveJdbcManagerFactoryImpl();
         i.setMasterJdbcManagerName("master");
 
-        i.container = (S2Container)context.getComponent("container");
+        i.setContainer((S2Container)context.getComponent("container"));
 
         context.register(master = new FakeJdbcManager(), "masterJdbcManager");
         context.register(slave1 = new FakeJdbcManager(), "slave1JdbcManager");

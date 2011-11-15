@@ -16,6 +16,7 @@
 package jp.troter.seasar.extension.jdbc.manager;
 
 import static org.easymock.EasyMock.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import jp.troter.seasar.extension.jdbc.MasterSlaveExceptionHandler;
 
@@ -90,12 +91,17 @@ public class MasterSlaveContextImplTest {
         masterSlaveContext = new MasterSlaveContextImpl();
         masterSlaveContext.addMasterSlaveJdbcManagerFactoryName("masterSlaveJdbcManagerFactory1");
         masterSlaveContext.addMasterSlaveJdbcManagerFactoryName("masterSlaveJdbcManagerFactory2");
-        masterSlaveContext.container = (S2Container)context.getComponent("container");
+        masterSlaveContext.setContainer((S2Container)context.getComponent("container"));
         masterSlaveContext.setMasterSlaveExceptionHanlderClass(Handler.class);
 
         context.register(master = new MockJdbcManager(), "masterJdbcManager");
         context.register(slave1 = new MockJdbcManager(), "slave1JdbcManager");
         context.register(slave2 = new MockJdbcManager(), "slave2JdbcManager");
+    }
+
+    @Test
+    public void smoke() {
+        assertThat(masterSlaveContext.getMasterSlaveJdbcManagerFactories().size(), is(2));
     }
 
     @Test
@@ -183,5 +189,37 @@ public class MasterSlaveContextImplTest {
         masterSlaveContext.useSlave();
         assertTrue(masterSlaveContext.isMaster());
         assertFalse(masterSlaveContext.isSlave());
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void useSlave_invalid_factory_name() {
+        factory1.addSlaveJdbcManagerName("slave1");
+        factory2.addSlaveJdbcManagerName("slave1");
+
+        masterSlaveContext.useSlave("not exists factory");
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void useMaster_invalid_factory_name() {
+        factory1.addSlaveJdbcManagerName("slave1");
+        factory2.addSlaveJdbcManagerName("slave1");
+
+        masterSlaveContext.useMaster("not exists factory");
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void isSlave_invalid_factory_name() {
+        factory1.addSlaveJdbcManagerName("slave1");
+        factory2.addSlaveJdbcManagerName("slave1");
+
+        masterSlaveContext.isSlave("not exists factory");
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void isMaster_invalid_factory_name() {
+        factory1.addSlaveJdbcManagerName("slave1");
+        factory2.addSlaveJdbcManagerName("slave1");
+
+        masterSlaveContext.isMaster("not exists factory");
     }
 }
