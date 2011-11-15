@@ -155,7 +155,8 @@ public class MasterSlaveContextImpl implements MasterSlaveContext {
 
     public MasterSlaveExceptionHandler getMasterSlaveExceptionHandler(String name) {
         try {
-            return handlerTable.putIfAbsent(name, this.handlerClass.newInstance());
+            handlerTable.putIfAbsent(name, this.handlerClass.newInstance());
+            return handlerTable.get(name);
         } catch (IllegalAccessException e) {
             logger.log(e);
             return new DefaultMasterSlaveExceptionHanlder();
