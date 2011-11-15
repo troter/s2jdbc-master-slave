@@ -15,8 +15,10 @@
  */
 package jp.troter.seasar.extension.jdbc.manager;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+
+import java.util.HashSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -56,11 +58,14 @@ public class MasterSlaveJdbcManagerFactoryImplTest {
         i.addSlaveJdbcManagerName("slave2");
         i.addSlaveJdbcManagerName("slave3");
         assertThat(i.getSlaveJdbcManagerNames().size(), is(3));
-        assertThat(i.getSlaveJdbcManagerNames(), hasItems("slave1", "slave2", "slave3"));
+        assertTrue(new HashSet<String>(i.getSlaveJdbcManagerNames()).contains("slave1"));
+        assertTrue(new HashSet<String>(i.getSlaveJdbcManagerNames()).contains("slave2"));
+        assertTrue(new HashSet<String>(i.getSlaveJdbcManagerNames()).contains("slave3"));
 
         i.removeSlaveJdbcManagerName("slave2");
         assertThat(i.getSlaveJdbcManagerNames().size(), is(2));
-        assertThat(i.getSlaveJdbcManagerNames(), hasItems("slave1", "slave3"));
+        assertTrue(new HashSet<String>(i.getSlaveJdbcManagerNames()).contains("slave1"));
+        assertTrue(new HashSet<String>(i.getSlaveJdbcManagerNames()).contains("slave3"));
     }
 
     @Test
