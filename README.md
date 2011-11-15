@@ -20,7 +20,7 @@ pom.xmlに追記する設定
       <dependency>
         <groupId>jp.troter</groupId>
         <artifactId>s2jdbc-master-slave</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.3-SNAPSHOT</version>
       </dependency>
     </dependencies>
 
@@ -59,8 +59,8 @@ pom.xmlに追記する設定
          | マスタースレーブ切り替えなどを担当
          |-->
         <component class="jp.troter.seasar.extension.jdbc.manager.MasterSlaveContextImpl">
-          <property name="MasterSlaveExceptionHanlderClass">
-            @jp.troter.seasar.extension.jdbc.handler.DefaultMasterSlaveExceptionHanlder@class
+          <property name="masterSlaveExceptionHanlderClass">
+            @jp.troter.seasar.extension.jdbc.handler.DefaultMasterSlaveExceptionHandler@class
           </property>
           <initMethod name="addMasterSlaveJdbcManagerFactoryName">
             <arg>"masterSlaveJdbcManagerFactory"</arg>
