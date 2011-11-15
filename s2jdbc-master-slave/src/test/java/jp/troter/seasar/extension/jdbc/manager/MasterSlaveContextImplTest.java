@@ -102,6 +102,7 @@ public class MasterSlaveContextImplTest {
     @Test
     public void smoke() {
         assertThat(masterSlaveContext.getMasterSlaveJdbcManagerFactories().size(), is(2));
+        assertThat(masterSlaveContext.getContainer(), notNullValue());
     }
 
     @Test

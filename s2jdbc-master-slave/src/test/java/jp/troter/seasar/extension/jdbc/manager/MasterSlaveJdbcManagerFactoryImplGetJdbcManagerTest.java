@@ -50,6 +50,7 @@ public class MasterSlaveJdbcManagerFactoryImplGetJdbcManagerTest {
 
     @Test
     public void smoke() {
+        assertThat(i.getContainer(), notNullValue());
         assertThat(i.getMasterJdbcManager(), instanceOf(MasterJdbcManagerWrapper.class));
         assertThat(i.getMasterJdbcManager().getJdbcManager(), is(master));
         assertThat(i.getMasterJdbcManager().getName() , is("master"));
