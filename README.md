@@ -20,7 +20,7 @@ pom.xmlに追記する設定
       <dependency>
         <groupId>jp.troter</groupId>
         <artifactId>s2jdbc-master-slave</artifactId>
-        <version>1.0.3-SNAPSHOT</version>
+        <version>1.0.3</version>
       </dependency>
     </dependencies>
 
