@@ -24,7 +24,7 @@ import jp.troter.seasar.extension.jdbc.MasterSlaveContext;
 import jp.troter.seasar.extension.jdbc.MasterSlaveExceptionHandler;
 import jp.troter.seasar.extension.jdbc.MasterSlaveJdbcManagerFactory;
 import jp.troter.seasar.extension.jdbc.MasterSlaveJdbcManagerFactoryUtil;
-import jp.troter.seasar.extension.jdbc.handler.DefaultMasterSlaveExceptionHanlder;
+import jp.troter.seasar.extension.jdbc.handler.DefaultMasterSlaveExceptionHandler;
 
 import org.seasar.framework.beans.util.BeanMap;
 import org.seasar.framework.container.S2Container;
@@ -175,10 +175,10 @@ public class MasterSlaveContextImpl implements MasterSlaveContext {
             return handlerTable.get(name);
         } catch (IllegalAccessException e) {
             logger.log(e);
-            return new DefaultMasterSlaveExceptionHanlder();
+            return new DefaultMasterSlaveExceptionHandler();
         } catch (InstantiationException e) {
             logger.log(e);
-            return new DefaultMasterSlaveExceptionHanlder();
+            return new DefaultMasterSlaveExceptionHandler();
         }
     }
 

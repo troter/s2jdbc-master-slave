@@ -17,8 +17,7 @@ package jp.troter.seasar.extension.jdbc.handler;
 
 import jp.troter.seasar.extension.jdbc.MasterSlaveExceptionHandler;
 
-@Deprecated
-public class DefaultMasterSlaveExceptionHanlder implements MasterSlaveExceptionHandler {
+public class DefaultMasterSlaveExceptionHandler implements MasterSlaveExceptionHandler {
 
     @Override
     public boolean isShouldRemove(Throwable throwable) {
